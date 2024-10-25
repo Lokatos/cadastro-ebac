@@ -111,15 +111,23 @@ int deletar() {
     setlocale(LC_ALL, "Portuguese");
     char cpf[50];
     char arquivo[55];
-    
-    printf("Digite o CPF do usuário a ser deletado: ");
-    scanf("%s", cpf);
+    char conf; // Confirmação 
 
-    strcpy(arquivo, cpf);
-    strcat(arquivo, ".txt");
-
-    char conf; // Confirmação
     while (1) {
+        printf("Digite o CPF do usuário a ser deletado: ");
+        scanf("%s", cpf);
+        strcpy(arquivo, cpf);
+        strcat(arquivo, ".txt");
+
+        // Verificando se o arquivo existe antes de tentar deletar
+        FILE *file = fopen(arquivo, "r");
+        if (file == NULL) {
+            printf("Arquivo não encontrado. Verifique o CPF e tente novamente.\n");
+            system("pause");
+            continue; // Retorna ao início do loop se o arquivo não existir
+        }
+        fclose(file); // Fecha o arquivo após verificação
+
         printf("\nTem certeza que quer deletar o usuário de CPF %s? (S/N): ", cpf);
         getchar(); // Limpa o buffer
         scanf(" %c", &conf); // O espaço antes de %c limpa o buffer
@@ -130,13 +138,22 @@ int deletar() {
             } else {
                 printf("Erro ao remover o arquivo!\n");
             }
-            break; // Sai do loop de confirmação
+
+            // Pergunta se deseja deletar outro arquivo
+            printf("Deseja deletar outro usuário? (S/N): ");
+            scanf(" %c", &conf);
+            if (conf == 'n' || conf == 'N') {
+                break; // Sai do loop se o usuário não quiser deletar mais
+            }
+
         } else if (conf == 'n' || conf == 'N') {
             printf("Operação cancelada!\n");
             break; // Sai do loop de confirmação
         } else {
             printf("Resposta inválida! Por favor, digite S para sim ou N para não.\n");
         }
+
+        system("pause");
     }
     return 0;
 }
@@ -178,3 +195,4 @@ int main() {
     }
     return 0;		
 }
+
