@@ -9,6 +9,7 @@ int registro() {
     char nome[50];
     char sobrenome[50];
     char cargo[50];
+    char conf; // Confirmação
     int x = 0;
 
     do {
@@ -55,7 +56,7 @@ int registro() {
         fprintf(file, "%s\n", cargo);
         fclose(file);
 
-        char conf; // Confirmação
+        
         while (1) {
             printf("\nDeseja inserir outro usuário? (S/N): ");
             getchar(); // Limpa o buffer
