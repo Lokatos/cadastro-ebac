@@ -159,41 +159,54 @@ int deletar() {
     return 0;
 }
 
-int main() {
-    int x = 0; // Armazenamento do valor inicial da letra X
+int main(){
+	int x = 0; // Armazenamento do valor inicial da letra X
+	char senha[10]="a";
+	printf("\t Cartório da EBAC\n\n");
+	
+	printf("\nDigite a senha de acesso: ");
+	scanf("%s",&senha);
+	if(strcmp(senha, "admin") ==0){
+		while (1) {
+		
+    		system("cls"); // cls é para limpar as mensagens
+       		setlocale(LC_ALL, "Portuguese"); // Definição da Linguagem
+   	  		printf("\t Cartório da EBAC\n\n "); // Início do menu
+   	   		printf("Escolha uma das opções a seguir:\n");
+     		printf("\t1 - Registrar nome:\n");
+    		printf("\t2 - Consultar nomes:\n");
+			printf("\t3 - Deletar nomes:\n");
+    		printf("\t4 - Sair!\n\n");
 
-    while (1) {
-        system("cls"); // cls é para limpar as mensagens
-        setlocale(LC_ALL, "Portuguese"); // Definição da Linguagem
-        printf("\t Cartório da EBAC\n\n "); // Início do menu
-        printf("Escolha uma das opções a seguir:\n");
-        printf("\t1 - Registrar nome:\n");
-        printf("\t2 - Consultar nomes:\n");
-        printf("\t3 - Deletar nomes:\n");
-        printf("\t4 - Sair!\n\n");
+    		printf("Opção: "); // Fim do menu
+			scanf("%d", &x); // Armazenamento do valor digitado pelo usuário
+			system("cls");
+			switch (x) {
+           		case 1:
+        		    registro();
+				break;
+    	    	case 2:
+					consulta();
+				break;
+        		case 3:
+					deletar();
+				break;
+          	 	case 4:
+					printf("\nObrigado!!!\n\n");
+					return 0;
+          		default:
+               		printf("Opção inválida!!!\n"); // Fim da seleção
+                	system("pause"); // Pausar o sistema, deixa mais organizado
+			} // Fim da seleção
+		}
+	}
+	else
+		printf("Senha incorreta !\n\n");
 
-        printf("Opção: "); // Fim do menu
-        scanf("%d", &x); // Armazenamento do valor digitado pelo usuário
-        system("cls");
 
-        switch (x) {
-            case 1:
-                registro();
-                break;
-            case 2:
-                consulta();
-                break;
-            case 3:
-                deletar();
-                break;
-            case 4:
-                printf("\nObrigado!!!\n\n");
-                return 0;
-            default:
-                printf("Opção inválida!!!\n"); // Fim da seleção
-                system("pause"); // Pausar o sistema, deixa mais organizado
-        } // Fim da seleção
-    }
-    return 0;		
+
+	
+	system("pause");
+	return 0;		
 }
 
